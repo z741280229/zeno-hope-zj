@@ -1,5 +1,6 @@
 package com.zeno.controller;
 
+import com.zeno.model.CountRecord;
 import com.zeno.model.PlayRecord;
 import com.zeno.service.PlayRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,6 @@ import java.util.List;
  * @author: Mr.Zeno
  * @create: 2020-05-22 12:05
  **/
-@RequestMapping(value = "/play")
 @Controller
 public class HopeController {
 
@@ -27,7 +27,7 @@ public class HopeController {
     @Autowired
     private PlayRecordService playRecordService;
 
-    @RequestMapping(value = "record",method = RequestMethod.GET)
+    @RequestMapping(value = "/record/play",method = RequestMethod.GET)
     @ResponseBody
     public String recordPlay(HttpServletRequest request){
         if (playRecordService.addPlayRecord(request)){
@@ -37,9 +37,34 @@ public class HopeController {
         }
     }
 
-    @RequestMapping(value = "list",method = RequestMethod.GET)
+    @RequestMapping(value = "/record/visit",method = RequestMethod.GET)
+    @ResponseBody
+    public String visitRecord(HttpServletRequest request){
+        if (playRecordService.addVisitRecord(request)){
+            return "0";
+        }else {
+            return "-1";
+        }
+    }
+
+    @RequestMapping(value = "play/list",method = RequestMethod.GET)
     @ResponseBody
     public List<PlayRecord> getPlayRecord(){
         return playRecordService.getPlayRecord();
     }
+
+
+    @RequestMapping(value = "visit/list",method = RequestMethod.GET)
+    @ResponseBody
+    public List<CountRecord> getVisitRecord(){
+        return playRecordService.getCountRecord();
+    }
+
+    @RequestMapping(value = "count/list",method = RequestMethod.GET)
+    @ResponseBody
+    public List<CountRecord> getCountRecord(){
+        return playRecordService.getCountRecord();
+    }
+
+
 }

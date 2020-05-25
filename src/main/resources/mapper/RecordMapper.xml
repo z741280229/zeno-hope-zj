@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zeno.mapper.RecordMapper">
+    <insert id="addPlayRecord">
+        INSERT INTO play_record
+        (ip,time)
+        VALUES (#{ip},#{time});
+    </insert>
+
+    <insert id="addVisitRecord">
+        INSERT INTO visit_record
+        (ip,time)
+        VALUES (#{ip},#{time});
+    </insert>
+
+    <insert id="addCountRecord" parameterType="com.zeno.model.CountRecord">
+        INSERT INTO count_record(ip,cur_time,opr_count,type,type_name)
+        VALUES (#{record.ip},#{record.curTime},#{record.oprCount},#{record.type},#{record.typeName})
+    </insert>
+
+    <update id="updateCountRecord" parameterType="com.zeno.model.CountRecord">
+        UPDATE count_record
+        SET
+        opr_count = #{record.oprCount},
+        cur_time = #{record.curTime},
+        ip =#{record.ip}
+        WHERE
+        TYPE = #{record.type}
+    </update>
+
+    <select id="getAllPlayRecord" resultType="com.zeno.model.PlayRecord">
+        SELECT ip,TIME FROM play_record
+    </select>
+
+    <select id="getCountRecord" resultType="com.zeno.model.CountRecord">
+        SELECT * FROM count_record WHERE TYPE = #{type}
+    </select>
+
+    <select id="getAllCountRecord" resultType="com.zeno.model.CountRecord">
+        SELECT ip,TIME FROM count_record
+    </select>
+
+    <select id="getAllVisitRecord" resultType="com.zeno.model.VisitRecord">
+        SELECT type_name,ip,CURRENT_TIME,COUNT FROM count_record
+    </select>
+</mapper>
