@@ -21,18 +21,29 @@
         <!-- 驱动 -->
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
         <!-- url -->
-        <property name="url" value="jdbc:mysql://IP:PORT/database?characterEncoding=utf8"/>
+        <property name="url" value="jdbc:mysql://IP:PORT/DATABASE?characterEncoding=utf8"/>
         <!-- 用户名 -->
-        <property name="username" value="user"/>
+        <property name="username" value=""/>
         <!-- 密码 -->
-        <property name="password" value="password"/>
+        <property name="password" value=""/>
     </bean>
+
+    <!-- 定义事务管理器 -->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <!--使用注释事务 -->
+    <tx:annotation-driven  transaction-manager="transactionManager" />
+
     <!-- mapper 配置 -->
     <!-- 让 spring 管理 sqlsessionfactory 使用mybatis和spring整合包中的 -->
     <bean id="sqlSessionFactory"
           class="org.mybatis.spring.SqlSessionFactoryBean">
         <!-- 数据库连接池 -->
         <property name="dataSource" ref="dataSource"/>
+        <!-- 配置mybatis全局配置文件 -->
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
         <!--pojo位置-->
         <property name="typeAliasesPackage" value="com.zeno.model"></property>
         <!--mapper文件位置-->

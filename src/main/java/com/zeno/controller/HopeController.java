@@ -2,6 +2,7 @@ package com.zeno.controller;
 
 import com.zeno.model.CountRecord;
 import com.zeno.model.PlayRecord;
+import com.zeno.model.VisitRecord;
 import com.zeno.service.PlayRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
@@ -56,8 +57,8 @@ public class HopeController {
 
     @RequestMapping(value = "visit/list",method = RequestMethod.GET)
     @ResponseBody
-    public List<CountRecord> getVisitRecord(){
-        return playRecordService.getCountRecord();
+    public List<VisitRecord> getVisitRecord(){
+        return playRecordService.getVisitRecord();
     }
 
     @RequestMapping(value = "count/list",method = RequestMethod.GET)

@@ -23,7 +23,7 @@ public interface RecordMapper {
 
     int updateCountRecord(@Param("record") CountRecord record);
 
-    CountRecord getCountRecord(@Param("type") Integer type);
+    CountRecord getCountRecord(@Param("type") Integer type,@Param("ip") String ip);
 
     List<PlayRecord> getAllPlayRecord();
 

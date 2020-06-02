@@ -22,10 +22,9 @@
         UPDATE count_record
         SET
         opr_count = #{record.oprCount},
-        cur_time = #{record.curTime},
-        ip =#{record.ip}
+        cur_time = #{record.curTime}
         WHERE
-        TYPE = #{record.type}
+        TYPE = #{record.type} and ip = #{record.ip}
     </update>
 
     <select id="getAllPlayRecord" resultType="com.zeno.model.PlayRecord">
@@ -33,14 +32,14 @@
     </select>
 
     <select id="getCountRecord" resultType="com.zeno.model.CountRecord">
-        SELECT * FROM count_record WHERE TYPE = #{type}
+        SELECT * FROM count_record WHERE TYPE = #{type} and ip = #{ip}
     </select>
 
     <select id="getAllCountRecord" resultType="com.zeno.model.CountRecord">
-        SELECT ip,TIME FROM count_record
+        SELECT type_name,ip,CUR_TIME,opr_count FROM count_record
     </select>
 
     <select id="getAllVisitRecord" resultType="com.zeno.model.VisitRecord">
-        SELECT type_name,ip,CURRENT_TIME,COUNT FROM count_record
+        SELECT ip,TIME FROM visit_record
     </select>
 </mapper>

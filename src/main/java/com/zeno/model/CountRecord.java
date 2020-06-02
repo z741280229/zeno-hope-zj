@@ -1,11 +1,14 @@
 package com.zeno.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 /**
  * @program: zeno-hope-zj
  * @description:
  * @author: Mr.Zeno
  * @create: 2020-05-25 09:33
  **/
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CountRecord {
 
     private String typeName;
